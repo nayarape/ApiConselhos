@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API CONSELHOS</title>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffecd1; /* Fundo em tom claro de laranja */
+            color: #333; /* Cor do texto */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Estilo do título */
+        h1 {
+            font-size: 2.5em;
+            color: #ff7f32; /* Laranja mais forte */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para destacar o título */
+        }
+
+        /* Estilo da caixa de conselho */
+        #advice {
+            background-color: #fff; /* Fundo branco para a caixa */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #555; /* Cor do texto dentro da caixa */
+        }
+
+        /* Estilo do botão */
+        button {
+            background-color: #ff7f32; /* Laranja forte */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+        }
+
+        button:hover {
+            background-color: #ff4f00; /* Laranja mais escuro no hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Conselho Aleatório</h1>
+    <button onclick="getAdvice()">Obter Conselho</button>
+    <p id="advice"></p>
+
+    <script>
+        async function getAdvice() {
+            try {
+                const response = await fetch("http://localhost:3000/advice");
+                const data = await response.json();
+                document.getElementById("advice").innerText = data.slip.advice;
+            } catch (error) {
+                console.error("Erro ao buscar conselho", error);
+            }
+        }
+    </script>
+</body>
+</html>
